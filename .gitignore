@@ -1,0 +1,19 @@
+# Java
+target/
+
+# Node
+node_modules/
+dist/
+package-lock.json
+
+# Data
+users.json
+
+# Windows
+*:Zone.Identifier
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
