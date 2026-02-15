@@ -63,3 +63,33 @@ fuser -k 5173/tcp
 
 #(Gentag evt. for 5174 hvis den stadig driller)
 ````
+
+## Frontend
+
+![alt text](pictures/image.png)
+
+## json user file: **backend/users.json**
+
+````json
+[ {
+  "id" : 1,
+  "name" : "Bob",
+  "email" : "bob@example.com"
+}, {
+  "id" : 2,
+  "name" : "Mads",
+  "email" : "mads@example.com"
+}, {
+  "id" : 3,
+  "name" : "inge",
+  "email" : "inge@test.dk"
+}, {
+  "id" : 4,
+  "name" : "michael",
+  "email" : "michael@test.dk"
+}, {
+  "id" : 5,
+  "name" : "jens",
+  "email" : "jens@test.dk"
+} ]
+````

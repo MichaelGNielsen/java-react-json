@@ -22,7 +22,7 @@ function App() {
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Java + React – gemt i <code>users.json</code></h1>
       <p><strong>Backend:</strong> http://localhost:8080</p>
-      <p><strong>Frontend:</strong> http://localhost:5173</p>
+      <p><strong>Frontend:</strong> {window.location.origin}</p>
       <hr />
       <input
         value={name}
