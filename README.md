@@ -50,11 +50,11 @@ curl -X POST http://localhost:8080/api/users \
   -d '{"name": "Mads", "email": "mads@example.com"}'
 ````
 
-## 🛠️ Fejlfinding 
+## 🛠️ Fejlfinding
 
-### Frontend starter på forkert port (f.eks. 5174 eller 5175)? 
+### Frontend starter på forkert port (f.eks. 5174 eller 5175)?
 
-Dette sker, hvis port 5173 allerede er optaget af en tidligere kørsel, der ikke blev lukket korrekt. 
+Dette sker, hvis port 5173 allerede er optaget af en tidligere kørsel, der ikke blev lukket korrekt.
 
 Du kan frigive porten ved at køre:
 
