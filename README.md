@@ -13,7 +13,8 @@ Dette er en demonstrations-applikation, der viser integrationen mellem en Java S
 Hvis du ikke har Java 21, Maven eller Node.js installeret, kan du køre opsætningsscriptet:
 
 ## check files
-````bash 
+
+````bash
 tree -a -L 3
 ./inst.sh
 ````
@@ -23,14 +24,15 @@ tree -a -L 3
 Du skal bruge to separate terminaler for at køre hele systemet samtidig.
 
 ### Terminal 1: Start Backend
+
 ````bash
 
 #term backend
 ./start_java_backend.sh
 ````
 
-
 ### Terminal 2: Start Frontend
+
 ````bash
 #tern frontend
 ./start_react_frontend.sh
