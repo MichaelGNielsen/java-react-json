@@ -10,7 +10,14 @@ Hele projektet er nu opsat til at køre i **Docker**, så du slipper for bøvl m
 
 Det eneste krav er, at du har **Docker Desktop** eller **Docker Engine** installeret.
 
-### 1. Start Applikationen
+### 1. Forberedelse (Kun første gang)
+Hvis du lige har hentet projektet (og `users.json` ikke fulgte med), skal du oprette database-filen før du bygger:
+
+```bash
+echo "[]" > backend/users.json
+```
+
+### 2. Start Applikationen
 
 Åbn en terminal i roden af projektet og kør:
 
