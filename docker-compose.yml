@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      # VIGTIGT: Dette sikrer at data gemmes i din lokale users.json fil
+      # selvom containeren slettes
+      - ./backend/users.json:/app/users.json
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      # Dette gør at du kan redigere kode live (Hot Reload)
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      # Nødvendig for at Hot Reload virker stabilt i WSL2
+      - CHOKIDAR_USEPOLLING=true
+      # Fortæl Vite at backenden hedder "backend" herinde
+      - PROXY_TARGET=http://backend:8080
+    depends_on:
+      - backend

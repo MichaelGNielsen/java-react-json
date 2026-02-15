@@ -7,6 +7,11 @@ export default defineConfig({
     host: '0.0.0.0',  // Listen on all network interfaces
     port: 5173,
     open: true,  // Open the browser on server start
-    proxy: {'/api': 'http://localhost:8080'}
+    proxy: {
+      '/api': {
+        target: process.env.PROXY_TARGET || 'http://localhost:8080',
+        changeOrigin: true,
+      }
+    }
   }
 })
