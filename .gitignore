@@ -1,22 +1,13 @@
-# Java
-target/
+# Dependencies
+node_modules
 
-# Node
-node_modules/
-dist/
-package-lock.json
+# Build output
+target
+dist
 
-# Data
-users.json
+# Local database / config
+backend/users.json
+.env
 
-# Windows
-*:Zone.Identifier
-Thumbs.db
-Desktop.ini
-
-# IDE
-.vscode/
-.idea/
-
-# html
+# temp html files
 *.html
