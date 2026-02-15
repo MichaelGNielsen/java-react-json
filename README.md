@@ -48,4 +48,18 @@ Du kan teste at backenden virker ved at sende data til den fra en tredje termina
 curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
   -d '{"name": "Mads", "email": "mads@example.com"}'
-````  
+````
+
+## 🛠️ Fejlfinding 
+
+### Frontend starter på forkert port (f.eks. 5174 eller 5175)? 
+
+Dette sker, hvis port 5173 allerede er optaget af en tidligere kørsel, der ikke blev lukket korrekt. 
+
+Du kan frigive porten ved at køre:
+
+````bash
+fuser -k 5173/tcp
+
+#(Gentag evt. for 5174 hvis den stadig driller)
+````
