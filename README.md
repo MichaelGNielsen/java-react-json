@@ -1,95 +1,68 @@
-# Java Spring Boot + React Fullstack Template
+Dette er en demonstrations-applikation, der viser integrationen mellem en **Java Spring Boot** backend og en **React** frontend.
 
-## 📖 Om Projektet
+Hele projektet er nu opsat til at køre i **Docker**, så du slipper for bøvl med installation af Java, Maven og Node.js versioner lokalt.
 
-Dette er en demonstrations-applikation, der viser integrationen mellem en Java Spring Boot backend og en React frontend.
+* **Backend:** Java 21 (Spring Boot) - Port `8080`
+* **Frontend:** React (Vite) - Port `5173`
+* **Data:** Gemmes i `backend/users.json` (Persisteret lokalt)
 
-* **Backend:** Java 21 (Spring Boot) - Kører REST API på port 8080.
-* **Frontend:** React (Vite) - Kører brugergrænseflade på port 5173.
-* **Miljø:** Opsat til WSL2 på Ubuntu 24.04.
+## 🚀 Start med Docker
 
-## 🛠️ Installation
+Det eneste krav er, at du har **Docker Desktop** eller **Docker Engine** installeret.
 
-Hvis du ikke har Java 21, Maven eller Node.js installeret, kan du køre opsætningsscriptet:
+### 1. Start Applikationen
 
-## check files
+Åbn en terminal i roden af projektet og kør:
 
-````bash
-tree -a -L 3
-./inst.sh
-````
+```bash
+docker compose up --build
+```
 
-## 🚀 Start Applikationen
+### 2. Åbn i Browseren
 
-Du skal bruge to separate terminaler for at køre hele systemet samtidig.
+Når containerne er startet (vent på "Started DemoApplication" i loggen), kan du tilgå:
 
-### Terminal 1: Start Backend
+* **Frontend:** http://localhost:5173
+* **Backend API:** http://localhost:8080
 
-````bash
+## 🛠️ Udvikling & Workflow
 
-#term backend
-./start_java_backend.sh
-````
+### Hot Reload
 
-### Terminal 2: Start Frontend
+* **Frontend:** Ændringer i `frontend/src` slår igennem med det samme (Hot Module Replacement).
+* **Backend:** Hvis du ændrer Java-kode, skal containeren genstartes for at bygge den nye `.jar` fil.
 
-````bash
-#tern frontend
-./start_react_frontend.sh
-````
+### Genstart Backend
 
-## 🧪 Test API
+Hvis du har ændret i Java-koden:
 
-Du kan teste at backenden virker ved at sende data til den fra en tredje terminal:
+```bash
+docker compose restart backend
+# Eller for en fuld rebuild:
+docker compose up -d --build backend
+```
 
-````bash
-# tilføj ny bruger
+### Stop Applikationen
 
+Tryk `Ctrl+C` i terminalen, eller kør:
+
+```bash
+docker compose down
+```
+
+## 🧪 Test API Manuelt
+
+Du kan stadig bruge `curl` fra din egen maskine mod backenden:
+
+```bash
 curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
-  -d '{"name": "Mads", "email": "mads@example.com"}'
-````
+  -d '{"name": "DockerUser", "email": "docker@test.com"}'
+```
 
-## 🛠️ Fejlfinding
+## 📂 Filstruktur & Docker
 
-### Frontend starter på forkert port (f.eks. 5174 eller 5175)?
-
-Dette sker, hvis port 5173 allerede er optaget af en tidligere kørsel, der ikke blev lukket korrekt.
-
-Du kan frigive porten ved at køre:
-
-````bash
-fuser -k 5173/tcp
-
-#(Gentag evt. for 5174 hvis den stadig driller)
-````
-
-## Frontend
-
-![alt text](pictures/image.png)
-
-## json user file: **backend/users.json**
-
-````json
-[ {
-  "id" : 1,
-  "name" : "Bob",
-  "email" : "bob@example.com"
-}, {
-  "id" : 2,
-  "name" : "Mads",
-  "email" : "mads@example.com"
-}, {
-  "id" : 3,
-  "name" : "inge",
-  "email" : "inge@test.dk"
-}, {
-  "id" : 4,
-  "name" : "michael",
-  "email" : "michael@test.dk"
-}, {
-  "id" : 5,
-  "name" : "jens",
-  "email" : "jens@test.dk"
-} ]
-````
+* `docker-compose.yml`: Definerer services og netværk.
+* `backend/Dockerfile`: Multi-stage build for Java (Maven -> JRE).
+* `frontend/Dockerfile`: Node.js miljø til React.
+* `backend/users.json`: Denne fil er "mounted" ind i containeren, så dine data gemmes på din disk og ikke forsvinder, når Docker stopper.
