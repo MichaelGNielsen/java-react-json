@@ -1,4 +1,4 @@
-# Java React JSON - Frontend & Backend (Docker)
+# Java Spring Boot backend og en React frontend i Docker
 
 Dette er en demonstrations-applikation, der viser integrationen mellem en **Java Spring Boot** backend og en **React** frontend.
 
