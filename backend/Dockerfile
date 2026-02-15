@@ -9,7 +9,18 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-# Kopier din json fil med ind, så den eksisterer
-COPY users.json .
+
+# Opret et start-script, der tjekker om databasen findes
+RUN echo '#!/bin/sh' > /entrypoint.sh && \
+    echo 'DB_FILE=/app/backend_data/users.json' >> /entrypoint.sh && \
+    echo 'if [ ! -f "$DB_FILE" ]; then' >> /entrypoint.sh && \
+    echo '  echo "[]" > "$DB_FILE"' >> /entrypoint.sh && \
+    echo '  echo "Oprettede ny database-fil: $DB_FILE"' >> /entrypoint.sh && \
+    echo 'fi' >> /entrypoint.sh && \
+    echo '# Lav et link så Java-appen tror filen ligger lokalt' >> /entrypoint.sh && \
+    echo 'ln -sf "$DB_FILE" /app/users.json' >> /entrypoint.sh && \
+    echo 'exec java -jar app.jar' >> /entrypoint.sh && \
+    chmod +x /entrypoint.sh
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["/entrypoint.sh"]

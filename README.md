@@ -1,3 +1,5 @@
+# Java React JSON - Frontend & Backend (Docker)
+
 Dette er en demonstrations-applikation, der viser integrationen mellem en **Java Spring Boot** backend og en **React** frontend.
 
 Hele projektet er nu opsat til at køre i **Docker**, så du slipper for bøvl med installation af Java, Maven og Node.js versioner lokalt.
@@ -10,20 +12,15 @@ Hele projektet er nu opsat til at køre i **Docker**, så du slipper for bøvl m
 
 Det eneste krav er, at du har **Docker Desktop** eller **Docker Engine** installeret.
 
-### 1. Forberedelse (Kun første gang)
-Hvis du lige har hentet projektet (og `users.json` ikke fulgte med), skal du oprette database-filen før du bygger:
-
-```bash
-echo "[]" > backend/users.json
-```
-
-### 2. Start Applikationen
+### 1. Start Applikationen
 
 Åbn en terminal i roden af projektet og kør:
 
 ```bash
 docker compose up --build
 ```
+
+*Bemærk: Første gang oprettes `backend/users.json` automatisk, hvis den ikke findes.*
 
 ### 2. Åbn i Browseren
 
@@ -66,10 +63,3 @@ curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
   -d '{"name": "DockerUser", "email": "docker@test.com"}'
 ```
-
-## 📂 Filstruktur & Docker
-
-* `docker-compose.yml`: Definerer services og netværk.
-* `backend/Dockerfile`: Multi-stage build for Java (Maven -> JRE).
-* `frontend/Dockerfile`: Node.js miljø til React.
-* `backend/users.json`: Denne fil er "mounted" ind i containeren, så dine data gemmes på din disk og ikke forsvinder, når Docker stopper.

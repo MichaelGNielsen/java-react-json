@@ -4,9 +4,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      # VIGTIGT: Dette sikrer at data gemmes i din lokale users.json fil
-      # selvom containeren slettes
-      - ./backend/users.json:/app/users.json
+      # Vi mounter hele backend-mappen til en data-folder i containeren
+      # Dette tillader containeren at oprette users.json hvis den mangler
+      - ./backend:/app/backend_data
 
   frontend:
     build: ./frontend
